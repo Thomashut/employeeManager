@@ -1,5 +1,6 @@
 @extends('main')
 @section('title', 'Employee List')
+@section('message', $message ?? null)
 
 @section('body')
     <h5>Employee List</h5>
