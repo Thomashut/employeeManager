@@ -15,6 +15,7 @@ body {
     background-color: bisque;
     margin-bottom: 3vh;
     background-clip: border-box;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .contentContainer {
@@ -27,4 +28,6 @@ body {
     padding: 2vw;
     width: 80%;
     background-color: antiquewhite;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
