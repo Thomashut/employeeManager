@@ -4,8 +4,11 @@
 @section('body')
     <form method="POST" action="/login">
         @csrf
-        <input type="text" name="email"/>
-        <input type="password" name="password"/>
-        <input type="submit" value="login"/>
+        <label for="emailField">User Email:</label>
+        <input type="text" id="emailField" name="email"/>
+
+        <label for="passwordField">User Password:</label>
+        <input type="password" id="passwordField" name="password"/>
+        <input type="submit" id="loginBtn" value="login"/>
     </form>
 @endsection
