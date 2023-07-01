@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\UnitsOfWork\Interfaces\IEmployeeUOW;
 use App\UnitsOfWork\Interfaces\IDepartmentUOW;
 
-use Illuminate\Contract\View;
+use Illuminate\View\View;
 
 /**
  * Will handle the requests and responses for Employees on the web route group
