@@ -22,6 +22,9 @@ class EmployeeFactory extends Factory
             'firstname' => fake()->word(),
             'surname' => fake()->word(),
             'dob' => fake()->date(),
+            'contact_email' => fake()->email(),
+            'contact_phone' => "0123546512",
+            'contact_address' => fake()->randomDigit() . " " . fake()->word() . " " . "Street",
             'status' => true,
             'active' => true
         ];
