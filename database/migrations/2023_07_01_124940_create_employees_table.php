@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('department_id');
             $table->string('firstname')->nullable();
             $table->string('surname')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_phone')->nullable();
+            $table->string('contact_address')->nullable();
             $table->date('dob')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->boolean('active')->nullable()->default(true);

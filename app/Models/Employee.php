@@ -57,6 +57,9 @@ class Employee extends Model
             $this->dob = $payload['dob'] ?? null;
             $this->status = $payload['status'] ?? 0;
             $this->active = $payload['active'] ?? true;
+            $this->contact_email = $payload['contact_email'] ?? null;
+            $this->contact_phone = $payload['contact_phone'] ?? null;
+            $this->contact_address = $payload['contact_address'] ?? null;
 
             $this->department_id = $payload['department_id'] ?? null;
 
@@ -87,6 +90,12 @@ class Employee extends Model
                 $this->status;
             $this->active = $payload['active'] ??
                 $this->active;
+            $this->contact_email = $payload['contact_email'] ?? 
+                $this->contact_email;
+            $this->contact_phone = $payload['contact_phone'] ?? 
+                $this->contact_phone;
+            $this->contact_address = $payload['contact_address'] ?? 
+                $this->contact_phone;
 
             $this->department_id = $payload['department_id'] 
                 ?? $this->department_id;
