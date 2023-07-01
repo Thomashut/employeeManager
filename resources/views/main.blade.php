@@ -7,6 +7,13 @@
     <title>Employee Manager - @yield('title')</title>
 </head>
 <body>
-    @yield('body')
+    <div class="titleBar">
+        <h3>Employee Manager</h3>
+    </div>
+    <div class="contentContainer">
+        <div class="content">
+        @yield('body')
+        </div>
+    </div>
 </body>
 </html>
