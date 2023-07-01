@@ -26,5 +26,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $employees->links('vendor.pagination.simple-default') }}
     <p><a href="/department/create">Add New Department</p>
 @endsection
