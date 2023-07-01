@@ -51,7 +51,7 @@ class DepartmentUOW implements IDepartmentUOW
      * @param ?array $payload - If null will use request body
      * @return ?Department
      */
-    public function storeDepartment(?array $payload) : ?Department
+    public function storeDepartment(?array $payload = null) : ?Department
     {
         $request = request();
         if(is_null($payload)) $payload = $request->all();
@@ -64,7 +64,7 @@ class DepartmentUOW implements IDepartmentUOW
      * @param ?array $payload - If null will use request body
      * @return ?Department
      */
-    public function updateDepartment(string $id, ?array $payload) : ?Department
+    public function updateDepartment(string $id, ?array $payload = null) : ?Department
     {
         $request = request();
         if(is_null($payload)) $payload = $request->all();

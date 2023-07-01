@@ -31,3 +31,15 @@ body {
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+table {
+    width: 100%
+}
+
+thead {
+    background-color: bisque;
+}
+
+tr:nth-child(even) {
+    background-color: bisque;
+}

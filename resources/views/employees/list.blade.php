@@ -6,7 +6,7 @@
     <table>
         <thead>
             <tr>
-                <td>Name</td><td>Department</td><td>Manager?</td><td>Edit</td><td>Delete</td>
+                <th>Name</th><th>Department</th><th>Manager?</th><th>Edit</th><th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -27,4 +27,5 @@
             @endforeach
         </tbody>
     </table>
+    <p><a href="/employee/create">Add New Employee</p>
 @endsection
