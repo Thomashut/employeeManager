@@ -41,7 +41,7 @@ class EmployeeController extends Controller
     {
         $departments = $this->dUOW->indexDepartments();
         $employee = $this->eUOW->showEmployee($id);
-        if(is_null($employee)) return view('employees.list', ['message' => "Employee Not Found"]);
+        if(is_null($employee)) return view('employees.list', ['employees' => $this->eUOW->indexEmployees(), 'message' => "Employee Not Found"]);
 
         return view('employees.form', ['employee' => $employee, 'departments' => $departments, 'edit' => true]);
     }
