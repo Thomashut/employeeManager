@@ -70,6 +70,7 @@ class DepartmentUOW implements IDepartmentUOW
         if(is_null($payload)) $payload = $request->all();
         $department = $this->dep::where('id', $id)->first();
         if(is_null($department)) {
+            $request = request();
             $request->merge(['request_result_error' => 'department not found']);
             return null;
         }
@@ -85,19 +86,31 @@ class DepartmentUOW implements IDepartmentUOW
     {
         $department = $this->dep::where('id', $id)->first();
         if(is_null($department)) {
+            $request = request();
             $request->merge(['request_result_error' => 'department not found']);
             return null;
         }
-        return $department->destroyDepartment($id);
+        try {
+            $department->delete();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function restoreDepartment(string $id) : bool
     {
         $department = $this->dep::withTrashed()->where('id', $id)->first();
         if(is_null($department)) {
+            $request = request();
             $request->merge(['request_result_error' => 'department not found']);
             return null;
         }
-        return $department->restoreDepartment($id);
+        try {
+            $department->restore();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

@@ -55,7 +55,10 @@ class EmployeeController extends Controller
                 'departments' => $this->dUOW->indexDepartments(),
                 'errors' => $request->request_result_error
             ]);
-        return view('employees.list', ['message' => "Employee Saved Successfully"]);
+        return view('employees.list', [
+            'employees' => $this->eUOW->indexEmployees(),
+            'message' => "Employee Saved Successfully"
+        ]);
     }
 
     public function update(string $id, Request $request) : View
@@ -67,13 +70,18 @@ class EmployeeController extends Controller
                 'departments' => $this->dUOW->indexDepartments(),
                 'errors' => $request->request_result_error
             ]);
-        return view('employees.list', ['message' => "Employee Saved Successfully"]);
+        return view('employees.list', [
+            'employees' => $this->eUOW->indexEmployees(),
+            'message' => "Employee Saved Successfully"
+        ]);
     }
 
     public function destroy(string $id, Request $request) : View
     {
         $check = $this->eUOW->destroyEmployee($id);
-        return view('employees.list', ['message' => $check ? 
+        return view('employees.list', [
+            'employees' => $this->eUOW->indexEmployees(),
+            'message' => $check ? 
             'Employee Deleted Successfully' : 
             'Failed to Delete Employee'
         ]);
@@ -82,7 +90,9 @@ class EmployeeController extends Controller
     public function restore(string $id, Request $request) : View
     {
         $check = $this->eUOW->destroyEmployee($id);
-        return view('employees.list', ['message' => $check ? 
+        return view('employees.list', [
+            'employees' => $this->eUOW->indexEmployees(),
+            'message' => $check ? 
             'Employee Restored Successfully' : 
             'Failed to Restore Employee'
         ]);

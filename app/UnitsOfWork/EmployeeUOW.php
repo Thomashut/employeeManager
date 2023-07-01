@@ -82,6 +82,7 @@ class EmployeeUOW implements IEmployeeUOW
         if(is_null($payload)) $payload = $request->all();
         $employee = $this->employee::where('id', $id)->first();
         if(is_null($employee)) {
+            $request = request();
             $request->merge(['request_result_error' => 'employee not found']);
             return null;
         }
@@ -97,19 +98,31 @@ class EmployeeUOW implements IEmployeeUOW
     {
         $employee = $this->employee::where('id', $id)->first();
         if(is_null($employee)) {
+            $request = request();
             $request->merge(['request_result_error' => 'employee not found']);
-            return null;
+            return false;
         }
-        return $employee->destroyEmployee($id);
+        try {
+            $employee->delete();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function restoreEmployee(string $id) : bool
     {
         $employee = $this->employee::withTrashed()->where('id', $id)->first();
         if(is_null($employee)) {
+            $request = request();
             $request->merge(['request_result_error' => 'employee not found']);
             return null;
         }
-        return $employee->restoreEmployee($id);
+        try {
+            $employee->restore();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }
