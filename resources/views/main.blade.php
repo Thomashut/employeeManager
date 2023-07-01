@@ -11,6 +11,11 @@
         <h3>Employee Manager</h3>
         
         @if (Auth::check())
+            <p><a href="/dashboard">Dashboard</a></p>
+            @if (Auth::user()->manager)
+                <p><a href="/employee/list">Employees</a></p>
+                <p><a href="/departments">Departments</a></p>
+            @endif
             <p><a href="./logout">Logout</a></p>
         @endif
  

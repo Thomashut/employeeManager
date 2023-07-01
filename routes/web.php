@@ -21,9 +21,9 @@ Route::get('/login', [EmployeeAuthController::class, 'login'])->withoutMiddlewar
 Route::post('/login', [EmployeeAuthController::class, 'login'])->withoutMiddleware('auth')->name('login');
 Route::get('/logout', [EmployeeAuthController::class, 'logout']);
 Route::post('/logout', [EmployeeAuthController::class, 'logout']);
+Route::get('/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('dashboard');
 
 Route::prefix('employee')->group(function() {
-    Route::get('/', [EmployeeController::class, 'dashboard'])->name('dashboard');
     Route::get('/list', [EmployeeController::class, 'index'])->name('employee');
     Route::get('/create', [EmployeeController::class, 'create']);
     Route::get('/edit/{id}', [EmployeeController::class, 'edit']);

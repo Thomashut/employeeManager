@@ -41,4 +41,9 @@ class EmployeeAuthController extends Controller
      
         return redirect('/');
     }
+
+    public function dashboard(Request $request) : View
+    {
+        return view('employees.dashboard');
+    }
 }
