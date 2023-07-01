@@ -2,7 +2,7 @@
 
 namespace App\UnitsOfWork\Interfaces;
 
-use Illuminate\Database\Eloquent\LengthAwarePaginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Employee;
 
 interface IEmployeeUOW
