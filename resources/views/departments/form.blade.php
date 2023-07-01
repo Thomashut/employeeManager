@@ -1,5 +1,6 @@
 @extends('main')
 @section('title', 'Department Form')
+@section('message', $message ?? null)
 
 @section('body')
     <h5>Department Form</h5>
