@@ -13,7 +13,7 @@ class DepartmentUOW implements IDepartmentUOW
 
     public function __construct(Department $dep)
     {
-        $this->$dep = $dep;
+        $this->dep = $dep;
     }
 
     /**
