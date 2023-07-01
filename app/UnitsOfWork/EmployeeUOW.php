@@ -63,7 +63,7 @@ class EmployeeUOW implements IEmployeeUOW
      * @param ?array $payload - If null will use request body
      * @return ?Employee
      */
-    public function storeEmployee(?array $payload) : ?Employee
+    public function storeEmployee(?array $payload = null) : ?Employee
     {
         $request = request();
         if(is_null($payload)) $payload = $request->all();
@@ -76,7 +76,7 @@ class EmployeeUOW implements IEmployeeUOW
      * @param ?array $payload - If null will use request body
      * @return ?Employee
      */
-    public function updateEmployee(string $id, ?array $payload) : ?Employee
+    public function updateEmployee(string $id, ?array $payload = null) : ?Employee
     {
         $request = request();
         if(is_null($payload)) $payload = $request->all();

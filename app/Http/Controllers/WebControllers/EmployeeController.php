@@ -34,7 +34,7 @@ class EmployeeController extends Controller
     public function create(Request $request) : View
     {
         $departments = $this->dUOW->indexDepartments();
-        return view('employees.form', ['departments' => $departments]);
+        return view('employees.form', ['employee' => null, 'departments' => $departments, 'edit' => false]);
     }
 
     public function edit(string $id, Request $request) : View
@@ -43,7 +43,7 @@ class EmployeeController extends Controller
         $employee = $this->eUOW->showEmployee($id);
         if(is_null($employee)) return view('employees.list', ['message' => "Employee Not Found"]);
 
-        return view('employees.form', ['employee' => $employee, 'department' => $departments]);
+        return view('employees.form', ['employee' => $employee, 'departments' => $departments, 'edit' => true]);
     }
 
     public function store(Request $request) : View
