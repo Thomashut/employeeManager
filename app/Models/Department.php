@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 
 use App\Models\Employee;
 
@@ -79,7 +80,7 @@ class Department extends Model
 
     // Model Relations
 
-    public function Employees() : array
+    public function Employees() : hasMany
     {
         return $this->hasMany('App\Models\Employee', 'department_id', 'id');
     }

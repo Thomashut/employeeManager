@@ -5,8 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\hasOne;
 
 use App\Models\Department;
+use App\Models\User;
 
 /**
  * Employee represents a individual working at the company.
@@ -98,8 +101,13 @@ class Employee extends Model
 
     // Model Relations
 
-    public function Department() : ?Department
+    public function Department() : BelongsTo
     {
         return $this->belongsTo('App\Models\Department', 'department_id', 'id');
+    }
+
+    public function User() : hasOne
+    {
+        return $this->hasOne('App\Models\User', 'employee_id', 'id');
     }
 }
