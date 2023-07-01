@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebControllers\DepartmentController;
+use App\Http\Controllers\WebControllers\EmployeeController;
+use App\Http\Controllers\WebControllers\EmployeeAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [EmployeeController::class, 'index']);
+Route::get('/login', [EmployeeAuthController::class, 'login'])->withoutMiddleware('auth')->name('login');
+Route::get('/logout', [EmployeeAuthController::class, 'logout']);
+
+Route::prefix('employee')->group(function() {
+    Route::get('/', [EmployeeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/list', [EmployeeController::class, 'index'])->name('employee');
+    Route::get('/create', [EmployeeController::class, 'create']);
+    Route::get('/edit/{id}', [EmployeeController::class, 'edit']);
+    Route::post('/save', [EmployeeController::class, 'store']);
+    Route::put('/update/{id}', [EmployeeController::class, 'update']);
+    Route::delete('/delete/{id}', [EmployeeController::class, 'destroy']);
+    Route::get('/restore/{id}', [EmployeeController::class, 'restore']);
 });
