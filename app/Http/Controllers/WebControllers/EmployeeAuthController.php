@@ -14,10 +14,10 @@ class EmployeeAuthController extends Controller
 {
     public function login(Request $request) : View
     {
-        $validator = Validator::make([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
-        ], $request->all());
+        ]);
 
         if($validator->fails())
             return view('system.login', ['message' => 'Please Login to use the system']);
