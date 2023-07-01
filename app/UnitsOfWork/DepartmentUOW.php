@@ -3,7 +3,7 @@
 namespace App\UnitsOfWork;
 
 use App\UnitsOfWork\Interfaces\IDepartmentUOW;
-use Illuminate\Database\Eloquent\LengthAwarePaginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Department;
 
 const DEFAULTDEPARTMENTPERPAGE = 30;

@@ -3,7 +3,7 @@
 namespace App\UnitsOfWork;
 
 use App\UnitsOfWork\Interfaces\IEmployeeUOW;
-use Illuminate\Database\Eloquent\LengthAwarePaginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Employee;
 
 const DEFAULTEMPLOYEEPERPAGE = 30;
@@ -13,7 +13,7 @@ class EmployeeUOW implements IEmployeeUOW
 
     public function __construct(Employee $employee)
     {
-        $this->$employee = $employee;
+        $this->employee = $employee;
     }
 
     /**
