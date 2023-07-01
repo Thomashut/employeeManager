@@ -1,5 +1,6 @@
 @extends('main')
 @section('title', 'Employee Form')
+@section('message', $message ?? null)
 
 @section('body')
     <h5>Employee Form</h5>
@@ -18,6 +19,11 @@
 
         <label for="emailField">Logon Email</label>
         <input type="text" value="{{ $employee->email ?? '' }}" id="emailField" name="email"/>
+
+        @if( !$edit )
+            <label for="passwordField">Logon Password</label>
+            <input type="password" id="passwordField" name="password"/>
+        @endif
         
         <label for="dobField">Date of Birth</label>
         <input type="date" value="{{ $employee->dob ?? '' }}" id="dobField" name="dob"/>
