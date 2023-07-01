@@ -19,6 +19,7 @@ use App\Http\Controllers\WebControllers\EmployeeAuthController;
 Route::get('/', [EmployeeController::class, 'index']);
 Route::get('/login', [EmployeeAuthController::class, 'login'])->withoutMiddleware('auth');
 Route::post('/login', [EmployeeAuthController::class, 'login'])->withoutMiddleware('auth')->name('login');
+Route::get('/logout', [EmployeeAuthController::class, 'logout']);
 Route::post('/logout', [EmployeeAuthController::class, 'logout']);
 
 Route::prefix('employee')->group(function() {
