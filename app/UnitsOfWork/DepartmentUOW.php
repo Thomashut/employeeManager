@@ -88,7 +88,7 @@ class DepartmentUOW implements IDepartmentUOW
         if(is_null($department)) {
             $request = request();
             $request->merge(['request_result_error' => 'department not found']);
-            return null;
+            return false;
         }
         try {
             $department->delete();
@@ -104,7 +104,7 @@ class DepartmentUOW implements IDepartmentUOW
         if(is_null($department)) {
             $request = request();
             $request->merge(['request_result_error' => 'department not found']);
-            return null;
+            return false;
         }
         try {
             $department->restore();

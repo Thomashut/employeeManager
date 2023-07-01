@@ -32,3 +32,13 @@ Route::prefix('employee')->group(function() {
     Route::delete('/delete/{id}', [EmployeeController::class, 'destroy']);
     Route::get('/restore/{id}', [EmployeeController::class, 'restore']);
 });
+
+Route::prefix('department')->group(function() {
+    Route::get('/list', [DepartmentController::class, 'index'])->name('department');
+    Route::get('/create', [DepartmentController::class, 'create']);
+    Route::get('/edit/{id}', [DepartmentController::class, 'edit']);
+    Route::post('/save', [DepartmentController::class, 'store']);
+    Route::put('/update/{id}', [DepartmentController::class, 'update']);
+    Route::delete('/delete/{id}', [DepartmentController::class, 'destroy']);
+    Route::get('/restore/{id}', [DepartmentController::class, 'restore']);
+});
