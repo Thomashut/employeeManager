@@ -55,7 +55,7 @@ class EmployeeUOW implements IEmployeeUOW
      */
     public function showEmployee(string $id) : ?Employee
     {
-        return $this->employee::where('id', $id)->where('active', true)->with(['employees'])->first();
+        return $this->employee::where('id', $id)->where('active', true)->with(['Department'])->first();
     }
 
     /**
