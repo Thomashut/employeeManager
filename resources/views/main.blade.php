@@ -9,6 +9,12 @@
 <body>
     <div class="titleBar">
         <h3>Employee Manager</h3>
+        
+        @if (Auth::check())
+            <p><a href="./logout">Logout</a></p>
+        @endif
+ 
+        
     </div>
     <div class="contentContainer">
         <div class="content">
