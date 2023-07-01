@@ -18,9 +18,20 @@
             @endif
             <p><a href="./logout">Logout</a></p>
         @endif
- 
-        
     </div>
+
+    @hasSection('message')
+        <div class="messageContainer">
+            <h5>@yield('message')</h5>
+        </div>
+    @endif
+
+    @hasSection('errorMessage')
+        <div class="errorContainer">
+            <h5>@yield('errorMessage')</h5>
+        </div>
+    @endif
+
     <div class="contentContainer">
         <div class="content">
         @yield('body')

@@ -5,15 +5,18 @@ namespace App\UnitsOfWork;
 use App\UnitsOfWork\Interfaces\IEmployeeUOW;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Employee;
+use App\Models\User;
 
 const DEFAULTEMPLOYEEPERPAGE = 30;
 class EmployeeUOW implements IEmployeeUOW
 {
     protected Employee $employee;
+    protected User $user;
 
-    public function __construct(Employee $employee)
+    public function __construct(Employee $employee, User $user)
     {
         $this->employee = $employee;
+        $this->user = $user;
     }
 
     /**
@@ -67,7 +70,14 @@ class EmployeeUOW implements IEmployeeUOW
     {
         $request = request();
         if(is_null($payload)) $payload = $request->all();
-        return $this->employee->storeEmployee($payload);
+
+        $employee = $this->employee->storeEmployee($payload);
+        if(is_null($employee)) return $employee;
+        $payload['employee_id'] = $employee->id;
+        $user = $this->user->storeUser($payload);
+        if(is_null($user)) return null;
+
+        return $employee;
     }
     
     /**

@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use App\Models\Employee;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,26 @@ class User extends Authenticatable
         'password' => 'hashed',
         'manager' => 'boolean'
     ];
+
+    // Model Functions
+
+    public function storeUser(array $payload) : ?User
+    {
+        $request = request();
+        try {
+            $this->email = $payload['email'];
+            $this->password = Hash::make($payload['password']);
+            $this->employee_id = $payload['employee_id'];
+
+            $this->save();
+            return $this;
+        } catch (\Exception $e) {
+            $request->merge(['request_result_error' => $e->getMessage()]);
+            return null;
+        }
+    }
+
+    // Model Relations
 
     public function Employee() : BelongsTo
     {

@@ -52,8 +52,10 @@ class EmployeeController extends Controller
         if(is_null($employee)) 
             return view('employees.form', 
             [
+                'employee' => (object) $request->all(),
+                'edit' => false,
                 'departments' => $this->dUOW->indexDepartments(),
-                'errors' => $request->request_result_error
+                'message' => $request->request_result_error
             ]);
         return view('employees.list', [
             'employees' => $this->eUOW->indexEmployees(),
@@ -68,7 +70,7 @@ class EmployeeController extends Controller
             return view('employees.form', 
             [
                 'departments' => $this->dUOW->indexDepartments(),
-                'errors' => $request->request_result_error
+                'message' => $request->request_result_error
             ]);
         return view('employees.list', [
             'employees' => $this->eUOW->indexEmployees(),

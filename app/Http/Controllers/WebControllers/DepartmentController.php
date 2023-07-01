@@ -45,7 +45,7 @@ class DepartmentController extends Controller
         if(is_null($department)) 
             return view('departments.form', 
             [
-                'errors' => $request->request_result_error
+                'message' => $request->request_result_error
             ]);
         return view('departments.list', [
             'departments' => $this->dUOW->indexDepartments(),
@@ -59,7 +59,7 @@ class DepartmentController extends Controller
         if(is_null($department)) 
             return view('departments.form', 
             [
-                'errors' => $request->request_result_error
+                'message' => $request->request_result_error
             ]);
         return view('departments.list', [
             'departments' => $this->dUOW->indexDepartments(),
