@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
+            $table->unsignedBigInteger('department_id');
             $table->string('firstname')->nullable();
             $table->string('surname')->nullable();
             $table->date('dob')->nullable();
@@ -21,9 +22,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreignId('department_id')->constrained(
-                table: 'departments', indexName: 'id'
-            )->nullable();
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 
