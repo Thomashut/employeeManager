@@ -15,8 +15,14 @@
                     <td>{{ "$employee->firstname $employee->surname" }}</td>
                     <td>{{ $employee->department?->name ?? "No Department" }}</td>
                     <td>{{ $employee->user?->manager ? "Yes" : "No" }}</td>
-                    <td><a href="./employee/edit/{{$employee->id}}">Edit</a></td>
-                    <td><a href="./employee/delete/{{$employee->id}}">Delete</a></td>
+                    <td><a href="/employee/edit/{{$employee->id}}">Edit</a></td>
+                    <td>
+                        <form method="POST" action="/employee/delete/{{$employee->id}}">
+                            @method("DELETE")
+                            @csrf
+                            <input type="submit" value="Delete" />
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
