@@ -23,13 +23,13 @@
         <input type="date" value="{{ $employee->dob ?? '' }}" id="dobField" name="dob"/>
 
         <label for="contactEmailField">Contact Email</label>
-        <input type="text" value="{{ $employee->contactEmail ?? '' }}" id="contactEmailField" name="contactEmail"/>
+        <input type="text" value="{{ $employee->contact_email ?? '' }}" id="contactEmailField" name="contact_email"/>
 
         <label for="contactPhoneField">Contact Phone</label>
-        <input type="text" value="{{ $employee->contactPhone ?? '' }}" id="contactPhoneField" name="contactPhone"/>
+        <input type="text" value="{{ $employee->contact_phone ?? '' }}" id="contactPhoneField" name="contact_phone"/>
 
         <label for="contactAddressField">Contact Address</label>
-        <input type="text" value="{{ $employee->contactAddress ?? '' }}" id="contactAddressField" name="contactAddress"/>
+        <input type="text" value="{{ $employee->contact_address ?? '' }}" id="contactAddressField" name="contact_address"/>
 
         <label for="departmentField">Department</label>
         <select name="department_id" id="departmentField">
