@@ -2,5 +2,6 @@
 @section('title', 'Dashboard')
 
 @section('body')
-    <p>Dashboard</p>
+    <h5>Dashboard</h5>
+    <p>Department: {{ Auth::user()->Employee?->Department?->name ?? "No Department" }}</p>
 @endsection
