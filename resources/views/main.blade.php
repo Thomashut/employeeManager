@@ -16,7 +16,7 @@
                 <p><a href="/employee/list">Employees</a></p>
                 <p><a href="/department/list">Departments</a></p>
             @endif
-            <p><a href="./logout">Logout</a></p>
+            <p><a href="/logout">Logout</a></p>
         @endif
     </div>
 
