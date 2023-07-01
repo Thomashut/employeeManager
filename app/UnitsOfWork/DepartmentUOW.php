@@ -43,7 +43,7 @@ class DepartmentUOW implements IDepartmentUOW
      */
     public function showDepartment(string $id) : ?Department
     {
-        return $this->dep::where('id', $id)->where('active', true)->with(['Department'])->first();
+        return $this->dep::where('id', $id)->where('active', true)->with(['Employees'])->first();
     }
 
     /**
