@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('manager')->nullable()->default(false);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('employee_id')->references('id')->on('employees');
         });
