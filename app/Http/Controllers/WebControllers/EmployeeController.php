@@ -10,9 +10,13 @@ use App\UnitsOfWork\Interfaces\IDepartmentUOW;
 
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Gate;
+
 /**
  * Will handle the requests and responses for Employees on the web route group
  */
+
+const MANAGEREMPLOYEEACCESS = 'manager-access';
 class EmployeeController extends Controller
 {
     protected IEmployeeUOW $eUOW;
@@ -26,6 +30,7 @@ class EmployeeController extends Controller
 
     public function index(Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $employees = $this->eUOW->indexEmployees();
 
         return view('employees.list', ['employees' => $employees]);
@@ -33,6 +38,7 @@ class EmployeeController extends Controller
 
     public function restoreIndex(Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $employees = $this->eUOW->indexRestoreEmployees();
 
         return view('employees.list', ['employees' => $employees, "restore" => true]);
@@ -40,12 +46,14 @@ class EmployeeController extends Controller
 
     public function create(Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $departments = $this->dUOW->indexDepartments();
         return view('employees.form', ['employee' => null, 'departments' => $departments, 'edit' => false]);
     }
 
     public function edit(string $id, Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $departments = $this->dUOW->indexDepartments();
         $employee = $this->eUOW->showEmployee($id);
         if(is_null($employee)) return view('employees.list', ['employees' => $this->eUOW->indexEmployees(), 'message' => "Employee Not Found"]);
@@ -55,6 +63,7 @@ class EmployeeController extends Controller
 
     public function store(Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $employee = $this->eUOW->storeEmployee();
         if(is_null($employee)) 
             return view('employees.form', 
@@ -72,6 +81,7 @@ class EmployeeController extends Controller
 
     public function update(string $id, Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $employee = $this->eUOW->updateEmployee($id);
         if(is_null($employee)) 
             return view('employees.form', 
@@ -87,6 +97,7 @@ class EmployeeController extends Controller
 
     public function destroy(string $id, Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $check = $this->eUOW->destroyEmployee($id);
         return view('employees.list', [
             'employees' => $this->eUOW->indexEmployees(),
@@ -98,6 +109,7 @@ class EmployeeController extends Controller
 
     public function restore(string $id, Request $request) : View
     {
+        if(! Gate::allows(MANAGEREMPLOYEEACCESS) ) abort(403);
         $check = $this->eUOW->restoreEmployee($id);
         return view('employees.list', [
             'employees' => $this->eUOW->indexEmployees(),
