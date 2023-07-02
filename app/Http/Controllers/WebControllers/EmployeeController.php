@@ -31,6 +31,13 @@ class EmployeeController extends Controller
         return view('employees.list', ['employees' => $employees]);
     }
 
+    public function restoreIndex(Request $request) : View
+    {
+        $employees = $this->eUOW->indexRestoreEmployees();
+
+        return view('employees.list', ['employees' => $employees, "restore" => true]);
+    }
+
     public function create(Request $request) : View
     {
         $departments = $this->dUOW->indexDepartments();
@@ -91,7 +98,7 @@ class EmployeeController extends Controller
 
     public function restore(string $id, Request $request) : View
     {
-        $check = $this->eUOW->destroyEmployee($id);
+        $check = $this->eUOW->restoreEmployee($id);
         return view('employees.list', [
             'employees' => $this->eUOW->indexEmployees(),
             'message' => $check ? 

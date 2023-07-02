@@ -18,11 +18,19 @@
                     <td>{{ $employee->user?->manager ? "Yes" : "No" }}</td>
                     <td><a href="/employee/edit/{{$employee->id}}">Edit</a></td>
                     <td>
-                        <form method="POST" action="/employee/delete/{{$employee->id}}">
-                            @method("DELETE")
-                            @csrf
-                            <input type="submit" value="Delete" />
-                        </form>
+                        @if(isset($restore) && $restore)
+                            <form method="POST" action="/employee/restore/{{$employee->id}}">
+                                @method("GET")
+                                @csrf
+                                <input type="submit" value="Restore" />
+                            </form>
+                        @else
+                            <form method="POST" action="/employee/delete/{{$employee->id}}">
+                                @method("DELETE")
+                                @csrf
+                                <input type="submit" value="Delete" />
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
@@ -30,4 +38,9 @@
     </table>
     {{ $employees->links('vendor.pagination.simple-default') }}
     <p><a href="/employee/create">Add New Employee</p>
+    @if(isset($restore) && $restore)
+        <p><a href="/employee/list">View Active Employees</a></p>
+    @else
+        <p><a href="/employee/restoreList">View Deleted Employees</a></p>
+    @endif
 @endsection
