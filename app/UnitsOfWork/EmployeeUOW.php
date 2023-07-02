@@ -114,6 +114,7 @@ class EmployeeUOW implements IEmployeeUOW
         }
         try {
             $employee->delete();
+            if(isset($employee->User) && !is_null($employee->user)) $employee->User->delete();
             return true;
         } catch (\Exception $e) {
             return false;
@@ -130,6 +131,7 @@ class EmployeeUOW implements IEmployeeUOW
         }
         try {
             $employee->restore();
+            if(!is_null($employee->User()->withTrashed()->first())) $employee->User()->withTrashed()->first()->restore();
             return true;
         } catch (\Exception $e) {
             return false;
