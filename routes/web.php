@@ -25,6 +25,7 @@ Route::get('/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('da
 
 Route::prefix('employee')->group(function() {
     Route::get('/list', [EmployeeController::class, 'index'])->name('employee');
+    Route::Get('/restoreList', [EmployeeController::class, 'restoreIndex']);
     Route::get('/create', [EmployeeController::class, 'create']);
     Route::get('/edit/{id}', [EmployeeController::class, 'edit']);
     Route::post('/save', [EmployeeController::class, 'store']);
