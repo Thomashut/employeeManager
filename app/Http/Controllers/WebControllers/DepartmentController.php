@@ -9,6 +9,9 @@ use App\UnitsOfWork\Interfaces\IDepartmentUOW;
 
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Gate;
+
+const DEPARTMENTACCESS = 'manager-access';
 class DepartmentController extends Controller
 {
     protected IDepartmentUOW $dUOW;
@@ -20,6 +23,7 @@ class DepartmentController extends Controller
 
     public function index(Request $request) : View
     {
+        if(! Gate::allows(DEPARTMENTACCESS) ) abort(403);
         $departments = $this->dUOW->indexDepartments();
 
         return view('departments.list', ['departments' => $departments]);
@@ -27,12 +31,14 @@ class DepartmentController extends Controller
 
     public function create(Request $request) : View
     {
+        if(! Gate::allows(DEPARTMENTACCESS) ) abort(403);
         $departments = $this->dUOW->indexDepartments();
         return view('departments.form', ['department' => null, 'edit' => false]);
     }
 
     public function edit(string $id, Request $request) : View
     {
+        if(! Gate::allows(DEPARTMENTACCESS) ) abort(403);
         $department = $this->dUOW->showDepartment($id);
         if(is_null($department)) return view('departments.list', ['message' => "Department Not Found"]);
 
@@ -41,6 +47,7 @@ class DepartmentController extends Controller
 
     public function store(Request $request) : View
     {
+        if(! Gate::allows(DEPARTMENTACCESS) ) abort(403);
         $department = $this->dUOW->storeDepartment();
         if(is_null($department)) 
             return view('departments.form', 
@@ -55,6 +62,7 @@ class DepartmentController extends Controller
 
     public function update(string $id, Request $request) : View
     {
+        if(! Gate::allows(DEPARTMENTACCESS) ) abort(403);
         $department = $this->dUOW->updateDepartment($id);
         if(is_null($department)) 
             return view('departments.form', 
@@ -69,6 +77,7 @@ class DepartmentController extends Controller
 
     public function destroy(string $id, Request $request) : View
     {
+        if(! Gate::allows(DEPARTMENTACCESS) ) abort(403);
         $check = $this->dUOW->destroyDepartment($id);
         return view('departments.list', [
             'departments' => $this->dUOW->indexDepartments(),
@@ -80,6 +89,7 @@ class DepartmentController extends Controller
 
     public function restore(string $id, Request $request) : View
     {
+        if(! Gate::allows(DEPARTMENTACCESS) ) abort(403);
         $check = $this->dUOW->destroyDepartment($id);
         return view('departments.list', [
             'departments' => $this->dUOW->indexDepartments(),

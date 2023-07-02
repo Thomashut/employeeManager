@@ -14,6 +14,7 @@ class DepartmentWebTest extends TestCase
     use RefreshDatabase;
 
     protected ?User $user;
+    protected ?User $nonManagerUser;
     protected ?Employee $employee;
     protected ?Department $department;
 
@@ -22,8 +23,10 @@ class DepartmentWebTest extends TestCase
 
         $department = Department::factory()->create();
         $user = User::factory()->for(Employee::Factory()->for($department)->create())->isManager()->create();
+        $nonManager = User::factory()->for(Employee::Factory()->for($department)->create())->create();
 
         $this->user = $user;
+        $this->nonManagerUser = $nonManager;
         $this->department = $department;
         $this->employee = $user->Employee;
     }
@@ -34,6 +37,7 @@ class DepartmentWebTest extends TestCase
         unset($this->user);
         unset($this->employee);
         unset($this->department);
+        unset($this->nonManagerUser);
     }
 
     public function test_department_list() : void
@@ -45,12 +49,32 @@ class DepartmentWebTest extends TestCase
         ob_end_clean();
     }
 
+    public function test_department_list_unauthorised() : void
+    {
+        ob_start();
+        $response = $this->actingAs($this->nonManagerUser, 'web')
+            ->get('/department/list', ["page" => 0]);
+
+        $response->assertStatus(403);
+        ob_end_clean();
+    }
+
     public function test_department_create() : void
     {
         $response = $this->actingAs($this->user, 'web')
             ->get('/department/create');
 
         $response->assertStatus(200);
+        ob_end_clean();
+    }
+
+    public function test_department_create_unauthorised() : void
+    {
+        ob_start();
+        $response = $this->actingAs($this->nonManagerUser, 'web')
+            ->get('/department/create');
+
+        $response->assertStatus(403);
         ob_end_clean();
     }
 
@@ -66,6 +90,19 @@ class DepartmentWebTest extends TestCase
         ob_end_clean();
     }
 
+    public function test_department_edit_unauthorised() : void
+    {
+        ob_start();
+        ob_get_level();
+        $url = "/department/edit/" . $this->department->id;
+        $response = $this->actingAs($this->nonManagerUser, 'web')
+            ->get($url, []);
+
+        $response->assertStatus(403);
+        ob_get_contents();
+        ob_end_clean();
+    }
+
     public function test_department_save() : void
     {
         ob_start();
@@ -73,6 +110,17 @@ class DepartmentWebTest extends TestCase
             ->post("/department/save", Department::factory()->make()->toArray());
 
         $response->assertStatus(200);
+        ob_get_contents();
+        ob_end_clean();
+    }
+
+    public function test_department_save_unauthorised() : void
+    {
+        ob_start();
+        $response = $this->actingAs($this->nonManagerUser, 'web')
+            ->post("/department/save", Department::factory()->make()->toArray());
+
+        $response->assertStatus(403);
         ob_get_contents();
         ob_end_clean();
     }
@@ -89,6 +137,18 @@ class DepartmentWebTest extends TestCase
         ob_end_clean();
     }
 
+    public function test_department_update_unauthorised() : void
+    {
+        ob_start();
+        $department = Department::factory()->create();
+        $response = $this->actingAs($this->nonManagerUser, 'web')
+            ->put("/department/update/$department->id", $department->toArray() );
+
+        $response->assertStatus(403);
+        ob_get_contents();
+        ob_end_clean();
+    }
+
     public function test_department_delete() : void
     {
         ob_start();
@@ -97,6 +157,18 @@ class DepartmentWebTest extends TestCase
             ->delete("/department/delete/$department->id");
 
         $response->assertStatus(200);
+        ob_get_contents();
+        ob_end_clean();
+    }
+
+    public function test_department_delete_unauthorised() : void
+    {
+        ob_start();
+        $department = Department::factory()->create();
+        $response = $this->actingAs($this->nonManagerUser, 'web')
+            ->delete("/department/delete/$department->id");
+
+        $response->assertStatus(403);
         ob_get_contents();
         ob_end_clean();
     }
@@ -110,6 +182,20 @@ class DepartmentWebTest extends TestCase
             ->get("/department/restore/$department->id");
 
         $response->assertStatus(200);
+        ob_get_contents();
+        ob_end_clean();
+    }
+
+
+    public function test_department_restore_unauthorised() : void
+    {
+        ob_start();
+        $department = Department::factory()->create();
+        $department->delete();
+        $response = $this->actingAs($this->nonManagerUser, 'web')
+            ->get("/department/restore/$department->id");
+
+        $response->assertStatus(403);
         ob_get_contents();
         ob_end_clean();
     }

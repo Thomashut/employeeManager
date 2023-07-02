@@ -18,7 +18,7 @@
         <input type="text" value="{{ $employee->surname ?? '' }}" id="surnameField" name="surname"/>
 
         <label for="emailField">Logon Email</label>
-        <input type="text" value="{{ $employee->email ?? '' }}" id="emailField" name="email"/>
+        <input type="text" value={{ $employee?->user->email ?? '' }} id="emailField" name="email"/>
 
         @if( !$edit )
             <label for="passwordField">Logon Password</label>
