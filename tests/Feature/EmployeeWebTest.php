@@ -78,6 +78,15 @@ class EmployeeWebTest extends TestCase
         ob_end_clean();
     }
 
+    public function test_employee_restoreList() : void
+    {
+        $response = $this->actingAs($this->user, 'web')
+            ->get('/employee/restoreList', ["page" => 0]);
+
+        $response->assertStatus(200);
+        ob_end_clean();
+    }
+
     public function test_employee_create() : void
     {
         $response = $this->actingAs($this->user, 'web')
